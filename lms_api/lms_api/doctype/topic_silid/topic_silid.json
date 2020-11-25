@@ -1,0 +1,103 @@
+{
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:{topic_name}",
+ "creation": "2020-08-08 21:34:43.479498",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "topic_name",
+  "topic_content",
+  "description",
+  "hero_image",
+  "program",
+  "subject"
+ ],
+ "fields": [
+  {
+   "fieldname": "topic_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "topic_content",
+   "fieldtype": "Table",
+   "label": "Topic Content",
+   "options": "Topic Content"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "hero_image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Hero Image"
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "label": "Program",
+   "options": "Program"
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Link",
+   "label": "Subject",
+   "options": "Course"
+  }
+ ],
+ "image_field": "hero_image",
+ "modified": "2020-08-08 22:31:30.720843",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Topic Silid",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Instructor",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

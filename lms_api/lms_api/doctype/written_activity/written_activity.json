@@ -1,0 +1,220 @@
+{
+ "autoname": "WA.#####",
+ "creation": "2020-03-26 23:45:13.707713",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "student",
+  "student_name",
+  "grade",
+  "highest_possible_score",
+  "title",
+  "upload",
+  "uploads",
+  "alternative_uploads",
+  "column_break_8",
+  "quarter",
+  "school_year",
+  "program",
+  "subject",
+  "topic",
+  "activity_type",
+  "video",
+  "activity"
+ ],
+ "fields": [
+  {
+   "fieldname": "activity",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Activity",
+   "options": "Article",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "upload",
+   "fieldtype": "Attach",
+   "label": "Upload"
+  },
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Student",
+   "options": "User"
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Grade",
+   "permlevel": 1,
+   "precision": "3"
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Program",
+   "options": "Program",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Student Name"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Title",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "video",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Video Activity",
+   "options": "Video",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "quarter",
+   "fieldtype": "Link",
+   "label": "Quarter",
+   "options": "Quarter",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "school_year",
+   "fieldtype": "Link",
+   "label": "School Year",
+   "options": "Academic Year",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Subject",
+   "options": "Course",
+   "permlevel": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "highest_possible_score",
+   "fieldtype": "Data",
+   "label": "Highest Possible Score",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "topic",
+   "fieldtype": "Link",
+   "label": "Topic",
+   "options": "Topic",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "activity_type",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Activity Type",
+   "options": "Article\nVideo"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "uploads",
+   "fieldtype": "Text Editor",
+   "label": "Uploads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "alternative_uploads",
+   "fieldtype": "Text Editor",
+   "label": "Alternative Uploads",
+   "read_only": 1
+  }
+ ],
+ "max_attachments": 1,
+ "modified": "2020-11-14 14:41:13.119311",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Written Activity",
+ "owner": "jvfiel@wela.online",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Instructor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "if_owner": 1,
+   "read": 1,
+   "role": "Student",
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "Student"
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Instructor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "title",
+ "track_changes": 1
+}

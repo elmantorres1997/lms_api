@@ -1,0 +1,49 @@
+{
+ "creation": "2020-09-04 18:14:29.726426",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "raw_inputs",
+  "quiz_name",
+  "quiz_activity_json"
+ ],
+ "fields": [
+  {
+   "fieldname": "raw_inputs",
+   "fieldtype": "Text",
+   "label": "Raw Inputs"
+  },
+  {
+   "fieldname": "quiz_name",
+   "fieldtype": "Data",
+   "label": "Quiz Name"
+  },
+  {
+   "fieldname": "quiz_activity_json",
+   "fieldtype": "Data",
+   "label": "Quiz Activity Json"
+  }
+ ],
+ "modified": "2020-09-04 18:14:29.726426",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Quiz Activity Error Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

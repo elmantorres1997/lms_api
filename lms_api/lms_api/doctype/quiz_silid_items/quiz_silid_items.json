@@ -1,0 +1,490 @@
+{
+ "creation": "2020-04-01 18:15:19.481772",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "question_type",
+  "question",
+  "question_points",
+  "note_for_points",
+  "question_image",
+  "section_break_3",
+  "correct",
+  "section_break_4",
+  "choice_1",
+  "image_1",
+  "column_break_4",
+  "correct_1",
+  "section_break_5",
+  "choice_2",
+  "image_2",
+  "column_break_8",
+  "correct_2",
+  "section_break_10",
+  "choice_3",
+  "image_3",
+  "column_break_12",
+  "correct_3",
+  "section_break_14",
+  "choice_4",
+  "image_4",
+  "column_break_16",
+  "correct_4",
+  "section_break_18",
+  "choice_5",
+  "image_5",
+  "column_break_20",
+  "correct_5",
+  "section_break_22",
+  "choice_6",
+  "image_6",
+  "column_break_24",
+  "correct_6",
+  "section_break_36",
+  "select_tf",
+  "section_break_38",
+  "fnb_answer_1",
+  "section_break_40",
+  "enum_ans_1",
+  "enum_ans_2",
+  "enum_ans_3",
+  "enum_ans_4",
+  "enum_ans_5",
+  "enum_ans_6",
+  "enum_ans_7",
+  "enum_ans_8",
+  "enum_ans_9",
+  "enum_ans_10",
+  "section_break_47",
+  "left_side",
+  "matching_left_1",
+  "matching_left_2",
+  "matching_left_3",
+  "matching_left_4",
+  "matching_left_5",
+  "matching_left_6",
+  "matching_left_7",
+  "matching_left_8",
+  "matching_left_9",
+  "matching_left_10",
+  "column_break_54",
+  "right_side",
+  "matching_right_1",
+  "matching_right_2",
+  "matching_right_3",
+  "matching_right_4",
+  "matching_right_5",
+  "matching_right_6",
+  "matching_right_7",
+  "matching_right_8",
+  "matching_right_9",
+  "matching_right_10"
+ ],
+ "fields": [
+  {
+   "fieldname": "question_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Question Type",
+   "options": "Multiple Choice\nIdentification\nEssay\nTrue or False\nFill in the Blank\nEnumeration\nMatching Type"
+  },
+  {
+   "fieldname": "question",
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "label": "Question",
+   "reqd": 1
+  },
+  {
+   "fieldname": "question_image",
+   "fieldtype": "Attach Image",
+   "label": "Question Image"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Identification\"",
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "correct",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Multiple Choice\"",
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "choice_1",
+   "fieldtype": "Long Text",
+   "label": "Choice 1",
+   "length": 1000
+  },
+  {
+   "fieldname": "image_1",
+   "fieldtype": "Attach Image",
+   "label": "Image 1"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "correct_1",
+   "fieldtype": "Check",
+   "label": "Correct 1"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Multiple Choice\"",
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "choice_2",
+   "fieldtype": "Long Text",
+   "label": "Choice 2",
+   "length": 1000
+  },
+  {
+   "fieldname": "image_2",
+   "fieldtype": "Attach Image",
+   "label": "Image 2"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "correct_2",
+   "fieldtype": "Check",
+   "label": "Correct 2"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Multiple Choice\"",
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "choice_3",
+   "fieldtype": "Long Text",
+   "label": "Choice 3",
+   "length": 1000
+  },
+  {
+   "fieldname": "image_3",
+   "fieldtype": "Attach Image",
+   "label": "Image 3"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "correct_3",
+   "fieldtype": "Check",
+   "label": "Correct 3"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Multiple Choice\"",
+   "fieldname": "section_break_14",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "choice_4",
+   "fieldtype": "Long Text",
+   "label": "Choice 4",
+   "length": 1000
+  },
+  {
+   "fieldname": "image_4",
+   "fieldtype": "Attach Image",
+   "label": "Image 4"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "correct_4",
+   "fieldtype": "Check",
+   "label": "Correct 4"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Multiple Choice\"",
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "choice_5",
+   "fieldtype": "Long Text",
+   "label": "Choice 5",
+   "length": 1000
+  },
+  {
+   "fieldname": "image_5",
+   "fieldtype": "Attach Image",
+   "label": "Image 5"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "correct_5",
+   "fieldtype": "Check",
+   "label": "Correct 5"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Multiple Choice\"",
+   "fieldname": "section_break_22",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "choice_6",
+   "fieldtype": "Long Text",
+   "label": "Choice 6",
+   "length": 1000
+  },
+  {
+   "fieldname": "image_6",
+   "fieldtype": "Attach Image",
+   "label": "Image 6"
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "correct_6",
+   "fieldtype": "Check",
+   "label": "Correct 6"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"True or False\"",
+   "fieldname": "section_break_36",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "select_tf",
+   "fieldtype": "Select",
+   "label": "Answer",
+   "options": "True\nFalse"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Fill in the Blank\"",
+   "fieldname": "section_break_38",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "fnb_answer_1",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Enumeration\"",
+   "fieldname": "section_break_40",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "enum_ans_1",
+   "fieldtype": "Text",
+   "label": "Answer 1"
+  },
+  {
+   "fieldname": "enum_ans_2",
+   "fieldtype": "Text",
+   "label": "Answer 2"
+  },
+  {
+   "fieldname": "enum_ans_3",
+   "fieldtype": "Text",
+   "label": "Answer 3"
+  },
+  {
+   "fieldname": "enum_ans_4",
+   "fieldtype": "Text",
+   "label": "Answer 4"
+  },
+  {
+   "fieldname": "enum_ans_5",
+   "fieldtype": "Text",
+   "label": "Answer 5"
+  },
+  {
+   "fieldname": "enum_ans_6",
+   "fieldtype": "Text",
+   "label": "Answer 6"
+  },
+  {
+   "depends_on": "eval: doc.question_type == \"Matching Type\"",
+   "fieldname": "section_break_47",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "left_side",
+   "fieldtype": "Heading",
+   "label": "Left Side"
+  },
+  {
+   "fieldname": "matching_left_1",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_left_2",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_left_3",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_left_4",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_left_5",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "column_break_54",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "right_side",
+   "fieldtype": "Heading",
+   "label": "Right Side"
+  },
+  {
+   "fieldname": "matching_right_1",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "matching_right_2",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "matching_right_3",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "matching_right_4",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "matching_right_5",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "default": "1",
+   "fieldname": "question_points",
+   "fieldtype": "Int",
+   "label": "Question Points"
+  },
+  {
+   "default": "<b style=\"color: red;\">Question Points - points per item for Matching Type and Enumeration</b>",
+   "depends_on": "eval: doc.question_type === \"Enumeration\" || doc.question_type === \"Matching Type\"",
+   "fieldname": "note_for_points",
+   "fieldtype": "HTML Editor",
+   "label": "Note for Points",
+   "read_only": 1
+  },
+  {
+   "fieldname": "matching_left_6",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_left_7",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_left_8",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_left_9",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_left_10",
+   "fieldtype": "Text",
+   "label": "Label"
+  },
+  {
+   "fieldname": "matching_right_6",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "matching_right_7",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "matching_right_8",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "matching_right_9",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "matching_right_10",
+   "fieldtype": "Text",
+   "label": "Answer"
+  },
+  {
+   "fieldname": "enum_ans_7",
+   "fieldtype": "Text",
+   "label": "Answer 7"
+  },
+  {
+   "fieldname": "enum_ans_8",
+   "fieldtype": "Text",
+   "label": "Answer 8"
+  },
+  {
+   "fieldname": "enum_ans_9",
+   "fieldtype": "Text",
+   "label": "Answer 9"
+  },
+  {
+   "fieldname": "enum_ans_10",
+   "fieldtype": "Text",
+   "label": "Answer 10"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-11-13 08:54:15.849640",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Quiz Silid Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

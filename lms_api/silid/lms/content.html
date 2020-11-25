@@ -1,0 +1,1116 @@
+{% extends "templates/base.html" %}
+{% block title %}{{ content.title or 'Content Page' }}{% endblock %}
+
+
+
+{% block head_include %}
+<style>
+	#link-uploader {
+		margin-top: 20px;
+		margin-bottom: 50px;
+		display:none;
+	}
+	#external-uploader {
+		min-height: 100px !important;
+		width: 100% !important;
+
+	}
+	.msgprint{
+		white-space: break-spaces !important;
+	}
+	.lms-content {
+		line-height: 1.8em;
+	}
+
+	.lms-content h1 {
+		margin-top: 1em;
+	}
+
+	.lms-content h2 {
+		margin-top: 1em;
+	}
+
+	.lms-content h3 {
+		margin-top: 0.8em;
+	}
+
+	.lms-content h4 {
+		margin-top: 0.6em;
+	}
+
+	section {
+		padding: 5rem 0 5rem 0;
+	}
+
+	.plyr--video .plyr__control.plyr__tab-focus,
+	.plyr--video .plyr__control:hover,
+	.plyr--video .plyr__control[aria-expanded='true'] {
+		background: #5e64ff !important;
+	}
+
+	.plyr__control--overlaid:focus,
+	.plyr__control--overlaid:hover {
+		background: #5e64ff !important;
+	}
+
+	.plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before {
+		background: #5e64ff !important;
+	}
+
+	.plyr__menu__container .plyr__control[role='menuitemradio'][aria-checked='true']::before {
+		background: #5e64ff;
+	}
+
+	.plyr--full-ui input[type='range'] {
+		color: #5e64ff !important;
+	}
+
+	.plyr__control--overlaid {
+		background: rgba(94, 100, 255, 0.8) !important;
+	}
+	.progress-bar_old {
+		height:35px;
+		width:250px;
+		border: 1px solid #0a8e20;
+		display:none;
+	}
+	.progress-bar-fill_old {
+		height:100%;
+		width:0%;
+		background: lightgreen;
+		display:flex;
+		align-items:center;
+		font-weight:bold;
+		transition:width 0.25s;
+	}
+	.progress-bar-text_old{
+		margin-left:10px;
+		font-weight:bold;
+	}
+
+	.progress-bar {
+		height:35px;
+		width:250px;
+		border: 1px solid #0a8e20;
+		display:none;
+	}
+	.progress-bar-fill {
+		height:100%;
+		width:0%;
+		background: lightgreen;
+		display:flex;
+		align-items:center;
+		font-weight:bold;
+		transition:width 0.25s;
+	}
+	.progress-bar-text{
+		margin-left:10px;
+		font-weight:bold;
+	}
+	label {
+		display: inline-block;
+		margin-bottom: 0.5rem !important;
+		font-size: 23px !important;
+		font-weight: bolder !important;
+	}
+	.form-check-input {
+		margin-top: 0.6rem !important;
+	}
+</style>
+
+
+<style type="text/css" media="print">
+	BODY {
+		display: none;
+		visibility: hidden;
+	}
+</style>
+
+<link rel="stylesheet" href="https://cdn.plyr.io/3.5.3/plyr.css" />
+{% endblock %}
+
+{% macro title() %}
+<div class="mb-3">
+	<a href="/lms/course?name={{ course }}&program={{ program }}" class="text-muted">
+		Back to Course
+	</a>
+</div>
+<div class="mb-3">
+	<a href="/desk#List/To%20Do%20Tasks/List" class="text-muted">
+		Go back to Pending Tasks
+	</a>
+</div>
+<div>
+	<h1>{{ content.title }} <span class="small text-muted">({{ position + 1 }}/{{length}})</span></h1>
+	<br>
+	{% if content.time_limit %}
+	<h1 id="quiz_timer">Time Limit: {{ content.time_limit }} minutes</h1>
+	{% endif %}
+</div>
+
+{% endmacro %}
+
+{% macro navigation() %}
+<a href="/desk#List/To%20Do%20Tasks/List" >
+	Go back to Pending Tasks
+</a>
+{% if content.publish_date.strftime('%Y-%m-%d %H:%M:%S.%f') <= frappe.utils.now() %}
+{% if previous %}
+
+<a href="/lms/content?program={{ program }}&course={{ course }}&topic={{ topic }}&type={{ previous.content_type }}&content={{ previous.content }}"
+	class='btn text-muted' style="box-shadow: none;">Previous</a>
+{% else %}
+
+<a href="/lms/course?name={{ course }}&program={{ program }}" class='btn text-muted' style="box-shadow: none;">Back to
+	Course</a>
+{% endif %}
+
+{% if next %}
+
+<button id="nextButton"
+	onclick="handle('/lms/content?program={{ program }}&course={{ course }}&topic={{ topic }}&type={{ next.content_type }}&content={{ next.content }}')"
+	class='btn btn-primary' disabled="true">Finish Task</button>
+{% else %}
+
+<button id="nextButton" onclick="handle('/lms/course?name={{ course }}&program={{ program }}')" class='btn btn-primary'
+	disabled="true">Finish Task</button>
+{% endif %}
+{% endif %}
+{% endmacro %}
+
+{% macro video() %}
+<div class="mb-5">
+	{{ title() }}
+	<div class="text-muted">
+		{% if content.duration %}
+		{{ content.duration }} Mins
+		{% endif %}
+
+		{% if content.publish_date and content.duration%}
+		-
+		{% endif %}
+
+		{% if content.publish_date %}
+		Published on {{ content.publish_date.strftime('%d, %b %Y') }}
+		{% endif %}
+	</div>
+</div>
+{% if content.provider=="Google Drive" %}
+<video id="player" playsinline controls>
+	<source src="{{ content.url }}" type="video/mp4" />
+</video>
+{% else %}
+<div id="player" data-plyr-provider="{{ content.provider|lower }}" data-plyr-embed-id="{{ content.url }}"></div>
+{% endif %}
+<div class="my-5 lms-content">
+	{{ content.description }}
+</div>
+{% endmacro %}
+
+{% macro article() %}
+<div class="mb-5">
+	{{ title() }}
+	<div class="text-muted">
+		{% if content.author or content.publish_date %}
+		Published
+		{% endif %}
+		{% if content.author %}
+		by {{ content.author }}
+		{% endif %}
+		{% if content.publish_date %}
+		on {{ content.publish_date.strftime('%b %d, %Y') }}
+		{% endif %}
+		{% if content.deadline %}
+		Deadline on {{ content.deadline.strftime('%b %d, %Y') }}
+		{% endif %}
+	</div>
+</div>
+{% if content.publish_date %}
+{% if content.publish_date.strftime('%Y-%m-%d %H:%M:%S.%f') > frappe.utils.now() %}
+<div>
+	<h5>
+		Article will be available on
+		{{ content.publish_date.strftime('%b %d, %Y') }}
+	</h5>
+</div>
+{% else %}
+<div class="lms-content">
+	{{ content.content }}
+</div>
+{% endif %}
+{% else %}
+<div class="lms-content">
+	{{ content.content }}
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro quiz() %}
+
+<div class="mb-5">
+	{{ title() }}
+{% if content.allowed_to_take_quiz %}
+
+    {% if content.publish_date or content.deadline %}
+		{% if content.publish_date.strftime('%Y-%m-%d %H:%M:%S.%f') > frappe.utils.now() %}
+
+		<div>
+			<h5>
+				Quiz will be available on
+				{{ content.publish_date.strftime('%b %d, %Y %I:%M:%p') }}
+			</h5>
+			<h5>
+				Deadline on
+				{{ content.deadline.strftime('%b %d, %Y %I:%M:%p') }}
+			</h5>
+		</div>
+		{% elif content.deadline %}
+			{% if content.deadline.strftime('%Y-%m-%d %H:%M:%S.%f') < frappe.utils.now()%}
+			<div>
+				<h5>
+					Quiz was available last {{ content.publish_date.strftime('%b %d, %Y %I:%M:%p') }}
+				</h5>
+				<h5>
+					Ended last {{ content.deadline.strftime('%b %d, %Y %I:%M:%p') }}
+				</h5>
+				<h5 style="color:red;">
+					Quiz already ended
+				</h5>
+			</div>
+			{% else %}
+			<div>
+				<b style="color:blue">
+					Quiz will end on {{ content.deadline.strftime('%b %d, %Y %I:%M:%p') }}
+				</b>
+			</div>
+			<button class="btn btn-primary" id="start-quiz-button" onclick="start_quiz()">Start Quiz</button>
+			<div id="quiz-wrapper"></div>
+			{% endif %}
+		{% else %}
+			<button class="btn btn-primary" id="start-quiz-button" onclick="start_quiz()">Start Quiz</button>
+			<div id="quiz-wrapper"></div>
+		{% endif %}
+	{% else %}
+	<button class="btn btn-primary" id="start-quiz-button" onclick="start_quiz()">Start Quiz</button>
+	<div id="quiz-wrapper"></div>
+	{% endif %}
+
+{% else %}
+
+    <p>Dear Student,
+<br>
+        You are not cleared to take this exam yet. Please ask your adviser.</p>
+
+{% endif %}
+</div>
+{% endmacro %}
+
+{% block content %}
+
+<section class="section">
+	<div>
+		<div class='container pb-5'>
+			{% if content.publish_date.strftime('%Y-%m-%d %H:%M:%S.%f') <= frappe.utils.now() %}
+
+				{% if content_type=='Video' %}
+					{% if content.deadline %}
+						{% if content.deadline.strftime('%Y-%m-%d %H:%M:%S.%f') > frappe.utils.now() %}
+							{{ video() }}
+						{% else %}
+							<h2>Deadline Date: {{ content.deadline.strftime('%b %d, %Y %H:%M:%p') }}</h2>
+							<h1>Activity already ended.</h1>
+						{% endif %}
+					{% else %}
+						{{ video() }}
+					{% endif %}
+				{% elif content_type=='Article'%}
+					{% if content.deadline %}
+						{% if content.deadline.strftime('%Y-%m-%d %H:%M:%S.%f') > frappe.utils.now() %}
+							{{ article() }}
+						{% else %}
+							<h2>Deadline Date: {{ content.deadline.strftime('%b %d, %Y %H:%M:%p') }}</h2>
+							<h1>Activity already ended.</h1>
+						{% endif %}
+					{% else %}
+						{{ article() }}
+					{% endif %}
+				{% elif content_type=='Quiz' %}
+				{{ quiz() }}
+				{% endif %}
+
+
+			{% if content.doctype=='Video' %}
+
+			{% set files = frappe.get_all('File',distinct=True, filters={'attached_to_doctype': content.doctype, 'attached_to_name': content.name}, fields=['file_name', 'file_url']) %}
+			{%- for file in files -%}
+			<div>Click on this link to Download: <a href="javascript:;" class="downloader-button" data-file-name="{{ file.file_name }}" data-file-url="{{ file.file_url }}">{{ file.file_name }}</a></div>
+			{%- endfor -%}
+
+			{% else %}
+
+		    {% set files = frappe.get_all('File',distinct=True, filters={'attached_to_doctype': content.doctype, 'attached_to_name': content.name}, fields=['file_name', 'file_url']) %}
+			{%- for file in files -%}
+			<div>Click on this link to Download: <a href="javascript:;" class="downloader-button" data-file-name="{{ file.file_name }}" data-file-url="{{ file.file_url }}">{{ file.file_name }}</a></div>
+			{%- endfor -%}
+
+			{% endif %}
+			<hr />
+			{% if uploaded_files or uploaded_files_s3 %}
+			<br>
+			<h4 style="color:green">Congratulations! You already have uploaded your work</h4>
+			<b>Files you uploaded:</b><br>
+			{% endif %}
+			{{ uploaded_files_s3 }}
+			{%- for file in uploaded_files -%}
+			<div><a href="javascript:;" class="downloader-button" data-file-name="{{ file.file_name }}" data-file-url="{{ file.file_url }}">{{ file.file_name }}</a> - Uploaded on {{ file.creation.strftime('%b %d, %Y %H:%M:%p') }} </div>
+			{%- endfor -%}
+
+			<hr/>
+
+			{% if content_type=='Article' or content_type=='Video' %}
+				{% if content.publish_date %}
+					{% if content.publish_date.strftime('%Y-%m-%d %H:%M:%S.%f') <= frappe.utils.now() %}
+						{% if content.deadline %}
+							{% if content.deadline.strftime('%Y-%m-%d %H:%M:%S.%f') > frappe.utils.now() %}
+								<div class="file-uploader">
+									<div style="margin-top: 20px; display:flex ">
+										<form id="frmFileUp">
+											<b style="color:red">File limit size: 200MB</b><br>
+											<b style="color:red">*If you uploaded a wrong file, re upload again to replace all the files you have uploaded for this task.</b><br>
+											<b style="color:red">*Everytime you upload/re upload it will replace all the files that you have previously uploaded for this task.</b><br>
+											<input type="file" id="select_files" name="select_files" multiple>
+										</form>
+									</div>
+									 <br>
+									<div class="progress-bar" id="progressBar">
+										<div class="progress-bar-fill">
+											<span class="progress-bar-text">0%</span>
+										</div>
+									</div>
+									<div style="margin-top: 10px; display:flex ">
+										<button id="btn_upload" class="btn btn-primary">Upload</button>
+									</div>
+									<br>
+									<a href="javascript:;" onclick="showAlternateUpload()">Cannot upload? Click here</a>
+								</div>
+
+								<div id="link-uploader">
+									<hr />
+									<div id="old-uploader">
+										<div style="margin-top: 20px; display:flex ">
+											<form id="frmFileUp">
+												<b style="color:red">Alternative Uploader</b><br>
+												<b style="color:red">File limit size: 50MB</b><br>
+												<input type="file" id="select_files_old" name="select_files" multiple>
+											</form>
+										</div>
+										 <br>
+										<div class="progress-bar_old" id="progressBarOld">
+											<div class="progress-bar-fill_old">
+												<span class="progress-bar-text_old">0%</span>
+											</div>
+										</div>
+										<div style="margin-top: 10px; display:flex ">
+										<button id="btn_upload_old" class="btn btn-primary">Upload</button>
+										</div>
+									</div>
+									<hr />
+									<b style="color:red">You can paste the link to your file here (for files that you have stored in your cloud storage ex. google drive, be sure that the file is accessible by your teacher)</b><br>
+									<textarea name="link-uploader" id="external-uploader" ></textarea>
+									<div style="margin-top: 10px; display:flex ">
+										<button id="btn_url_upload" class="btn btn-primary">Attach</button>
+									</div>
+								</div>
+							{% endif %}
+						{% else %}
+							<div class="file-uploader">
+									<div style="margin-top: 20px; display:flex ">
+										<form id="frmFileUp">
+											<b style="color:red">File limit size: 200MB</b><br>
+											<b style="color:red">*If you uploaded a wrong file, re upload again to replace all the files you have uploaded for this task.</b><br>
+											<b style="color:red">*Everytime you upload/re upload it will replace all the files that you have previously uploaded for this task.</b><br>
+											<input type="file" id="select_files" name="select_files" multiple>
+										</form>
+									</div>
+									 <br>
+									<div class="progress-bar" id="progressBar">
+										<div class="progress-bar-fill">
+											<span class="progress-bar-text">0%</span>
+										</div>
+									</div>
+									<div style="margin-top: 10px; display:flex ">
+										<button id="btn_upload" class="btn btn-primary">Upload</button>
+									</div>
+									<br>
+									<a href="javascript:;" onclick="showAlternateUpload()">Cannot upload? Click here</a>
+								</div>
+
+								<div id="link-uploader">
+									<hr />
+									<div id="old-uploader">
+										<div style="margin-top: 20px; display:flex ">
+											<form id="frmFileUp">
+												<b style="color:red">Alternative Uploader</b><br>
+												<b style="color:red">File limit size: 50MB</b><br>
+												<input type="file" id="select_files_old" name="select_files" multiple>
+											</form>
+										</div>
+										 <br>
+										<div class="progress-bar_old" id="progressBarOld">
+											<div class="progress-bar-fill_old">
+												<span class="progress-bar-text_old">0%</span>
+											</div>
+										</div>
+										<div style="margin-top: 10px; display:flex ">
+										<button id="btn_upload_old" class="btn btn-primary">Upload</button>
+										</div>
+									</div>
+									<hr />
+									<b style="color:red">You can paste the link to your file here (for files that you have stored in your cloud storage ex. google drive, be sure that the file is accessible by your teacher)</b><br>
+									<textarea name="link-uploader" id="external-uploader" ></textarea>
+									<div style="margin-top: 10px; display:flex ">
+										<button id="btn_url_upload" class="btn btn-primary">Attach</button>
+									</div>
+								</div>
+						{% endif %}
+					{% endif %}
+				{% else %}
+					<div class="file-uploader">
+						<div style="margin-top: 20px; display:flex ">
+							<form id="frmFileUp">
+								<b style="color:red">File limit size: 200MB</b><br>
+								<b style="color:red">*If you uploaded a wrong file, re upload again to replace all the files you have uploaded for this task.</b><br>
+								<b style="color:red">*Everytime you upload/re upload it will replace all the files that you have previously uploaded for this task.</b><br>
+								<input type="file" id="select_files" name="select_files" multiple>
+							</form>
+						</div>
+						 <br>
+						<div class="progress-bar" id="progressBar">
+							<div class="progress-bar-fill">
+								<span class="progress-bar-text">0%</span>
+							</div>
+						</div>
+						<div style="margin-top: 10px; display:flex ">
+							<button id="btn_upload" class="btn btn-primary">Upload</button>
+						</div>
+						<br>
+						<a href="javascript:;" onclick="showAlternateUpload()">Cannot upload? Click here</a>
+					</div>
+
+					<div id="link-uploader">
+						<hr />
+							<div id="old-uploader">
+								<div style="margin-top: 20px; display:flex ">
+									<form id="frmFileUp">
+										<b style="color:red">Alternative Uploader</b><br>
+										<b style="color:red">File limit size: 50MB</b><br>
+										<input type="file" id="select_files_old" name="select_files" multiple>
+									</form>
+								</div>
+								 <br>
+								<div class="progress-bar_old" id="progressBarOld">
+									<div class="progress-bar-fill_old">
+										<span class="progress-bar-text_old">0%</span>
+									</div>
+								</div>
+								<div style="margin-top: 10px; display:flex ">
+								<button id="btn_upload_old" class="btn btn-primary">Upload</button>
+								</div>
+							</div>
+						<hr />
+						<b style="color:red">You can paste the link to your file here (for files that you have stored in your cloud storage ex. google drive, be sure that the file is accessible by your teacher)</b><br>
+						<textarea name="link-uploader" id="external-uploader" ></textarea>
+						<div style="margin-top: 10px; display:flex ">
+							<button id="btn_url_upload" class="btn btn-primary">Attach</button>
+						</div>
+					</div>
+				{% endif %}
+			{% endif %}
+
+			{% else %}
+				<h2>Publish Date: {{ content.publish_date.strftime('%b %d, %Y %H:%M:%p') }}</h2>
+				<h1>Content not yet published.</h1>
+			{% endif %}
+
+
+<!--			<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.24.min.js"></script>-->
+			<script src="https://sdk.amazonaws.com/js/aws-sdk-2.773.0.min.js"></script>
+			<div id="wela1">
+				<script type="text/javascript">
+
+
+				//Bucket Configurations
+				var bucketName = "welaph";
+				var bucketRegion = "ap-southeast-1";
+				var IdentityPoolId = "ap-southeast-1:d9e4dcd1-ff88-482c-beee-483a6ba14ece";
+
+				 AWS.config.update({
+								region: bucketRegion,
+								credentials: new AWS.CognitoIdentityCredentials({
+									IdentityPoolId: IdentityPoolId
+								}),
+								 maxRetries: 3,
+								  httpOptions: {
+									timeout: 600 * 1000,
+									connectTimeout: 600 * 1000,
+								  },
+								correctClockSkew: true
+							});
+
+							var s3 = new AWS.S3({
+								params: {Bucket: bucketName}
+						});
+				document.getElementById("wela1").innerHTML = "";
+				</script>
+			</div>
+			<div id="wela2">
+
+
+				<script type="text/javascript">
+					let showAlternateUpload = function() {
+						$('#link-uploader').css("display", "block");
+					}
+					let download_file=function(e,i){let a=e.includes("private");window.open(`/api/method/lms_api.patches.private.download?is_private=${a}&filename=${e}`)};
+					let downloader_function = function() {
+						let file_name = this.getAttribute("data-file-name");
+						let file_url = this.getAttribute("data-file-url");
+						download_file(`${encodeURIComponent(file_url)}`, `${file_name}`);
+					}
+					window.onload = function() {
+						let elements = document.getElementsByClassName("downloader-button");
+						for (var i = 0; i < elements.length; i++) {
+							elements[i].addEventListener('click', downloader_function, false);
+						}
+					}
+					frappe.ready(function () {
+
+						const placeholder = 'https://drive.google.com/file/d/1SEewAG-EwA-r2dDDKb...\nhttps://drive.google.com/file/d/0BXhwAS-EeA-r6jLLKb...';
+						$('textarea#external-uploader').val(placeholder);
+						$('textarea#external-uploader').focus(function(){
+							if($(this).val() === placeholder){
+								$(this).val('');
+							}
+						});
+
+						$('textarea#external-uploader').blur(function(){
+							if($(this).val() ===''){
+								$(this).val(placeholder);
+							}
+						});
+					})
+					frappe.ready(function () {
+						var $form = $("form[id='frmFileUp']");
+
+						$form.on("change", "[type='file']", function () {
+							var $input = $(this);
+							var input = $input.get(0);
+
+							if (input.files.length) {
+								input.filedata = { "files_data": [] }; //Initialize as json array.
+
+								window.file_reading = true;
+
+								$.each(input.files, function (key, value) {
+									setupReader(value, input);
+								});
+
+								window.file_reading = false;
+							}
+						});
+						let ID = function () {
+						  return Math.random().toString(36).substr(2, 5)+'_';
+						};
+						function s3upload() {
+						   var files = document.getElementById('select_files').files;
+						   var fileUrl = "";
+						   let progressBarFill = document.querySelector("#progressBar > .progress-bar-fill");
+							let progressBarText = progressBarFill.querySelector(".progress-bar-text");
+							var fileUrls = [];
+							let total = files.length;
+							let count = 0;
+							let percent = 0;
+
+							return new Promise((resolve, reject) => {
+								for(var i=0;i<files.length;i++){
+									var file = files[i];
+									console.log(file);
+									var fileExtension = file.name.split('.').pop();
+									var contentTitle = `{{content.title}}`
+									contentTitle = contentTitle.replace(/[^\w\s]/gi, '').replaceAll(" ","-");
+									var fileName = `{{student_name}}` +"_"+ contentTitle+ "_" + (new Date().toISOString().split('T')[0])+"_"+ID()+"."+fileExtension;
+									var filePath = 'welaph/' + fileName;
+									fileUrl = 'https://welaph.s3-' + bucketRegion + '.amazonaws.com/' +  filePath;
+									fileUrls.push(fileUrl);
+
+									s3.upload({
+									Key: filePath,
+									Body: file,
+									ACL: 'public-read'
+									},
+									 function(err, data) {
+										if(err) {
+											alert(err);
+											reject(err);
+										} if(data){
+											count++;
+											if (count >= total) {
+												resolve(fileUrls);
+											}
+										}
+									}).on('httpUploadProgress', function (progress) {
+										percent = (progress.loaded/files.length)  / (progress.total*files.length) * 100;
+										progressBarFill.style.width = percent.toFixed(2) + "%";
+										progressBarText.textContent = percent.toFixed(2) + "%";
+									});
+								}
+							});
+
+
+						};
+
+						$("#btn_url_upload").click(async function() {
+							var fileUrls = $('textarea#external-uploader').val();
+							const placeholder = 'https://drive.google.com/file/d/1SEewAG-EwA-r2dDDKb...\nhttps://drive.google.com/file/d/0BXhwAS-EeA-r6jLLKb...';
+							if (fileUrls !== placeholder) {
+								var fileUrl = "";
+								fileUrls = fileUrls.split("\n")
+								fileUrls = [...new Set(fileUrls)];
+								fileUrls.forEach(function(item,index){
+									fileUrl = fileUrl + `<b>Alternate link:</b>  <a href="${item}" target="_blank" style="color:blue">${item}</a> <br><br>`
+								})
+								var xhr = new XMLHttpRequest();
+								xhr.onreadystatechange = function () {
+										if (xhr.readyState == XMLHttpRequest.DONE) {
+											if (xhr.status === 200) {
+
+												opts = {
+													method: "erpnext.education.utils.add_activity",
+													args: {
+														course: `{{ course }}`,
+														content_type: `{{ content_type }}`,
+														content: `{{ content.name }}`,
+														program: `{{ program }}`
+													}
+												}
+												frappe.call(opts).then(res => {})
+												frappe.msgprint({
+													title: "Alternate Link",
+													indicator: 'green',
+													message: "Alternate Links attached successfully.",
+													primary_action: {
+														'label': 'Confirm',
+														action(values) {
+															this.hide();
+															window.location.reload();
+														}
+													}
+												});
+											} else {
+												frappe.msgprint({
+													title: "File Attachment",
+													indicator: 'red',
+													message: "Link was not attached.",
+													primary_action: {
+														'label': 'Confirm',
+														action(values) {
+															this.hide();
+															window.location.reload();
+														}
+													}
+												});
+											}
+										}
+									};
+									xhr.open('POST', '/api/method/lms_api.silid.attach_file.attach_url_to_project', true);
+									xhr.setRequestHeader('Accept', 'application/json');
+									xhr.setRequestHeader('X-Frappe-CSRF-Token', frappe.csrf_token);
+									var form_data = new FormData();
+									form_data.append('work', `{{ content.name }}`);
+									form_data.append('title', `{{ content.name }}`);
+									form_data.append('work_title', `{{ content.title }}`);
+									form_data.append('student', `{{ frappe.session.user }}`);
+									form_data.append('doctype', `{{ content.doctype }}`);
+									form_data.append('course', `{{ course }}`);
+									form_data.append('topic', `{{ topic }}`);
+									form_data.append('program', `{{ program }}`);
+									form_data.append('filedata', "");
+									form_data.append('fileUrl', fileUrl);
+									xhr.send(form_data);
+							}
+
+						})
+
+						$("#btn_upload").click(async function () {
+							$(".progress-bar").show();
+							var projname = $('#projname').val();
+							//var filedata = $('#select_files').prop('filedata');
+							s3upload().then(resp=>{
+								var fileUrls = resp;
+								var fileUrl = "";
+								fileUrls.forEach(function(item,index){
+									fileUrl = fileUrl + `<b>Link:</b>  <a href="${item}" target="_blank" style="color:blue">${item}</a> <br><br>`
+								})
+								var xhr = new XMLHttpRequest();
+								xhr.onreadystatechange = function () {
+									if (xhr.readyState == XMLHttpRequest.DONE) {
+										if (xhr.status === 200) {
+
+											opts = {
+												method: "erpnext.education.utils.add_activity",
+												args: {
+													course: `{{ course }}`,
+													content_type: `{{ content_type }}`,
+													content: `{{ content.name }}`,
+													program: `{{ program }}`
+												}
+											}
+											frappe.call(opts).then(res => {})
+											frappe.msgprint({
+												title: "File Upload",
+												indicator: 'green',
+												message: "File(s) uploaded successfully.",
+												primary_action: {
+													'label': 'Confirm',
+													action(values) {
+														this.hide();
+														window.location.reload();
+													}
+												}
+											});
+										} else {
+											frappe.msgprint({
+												title: "File Upload",
+												indicator: 'red',
+												message: "File was not uploaded.",
+												primary_action: {
+													'label': 'Confirm',
+													action(values) {
+														this.hide();
+														window.location.reload();
+													}
+												}
+											});
+										}
+									}
+								};
+								xhr.open('POST', '/api/method/lms_api.silid.attach_file.attach_file_to_project', true);
+								xhr.setRequestHeader('Accept', 'application/json');
+								xhr.setRequestHeader('X-Frappe-CSRF-Token', frappe.csrf_token);
+								var form_data = new FormData();
+								form_data.append('work', `{{ content.name }}`);
+								form_data.append('title', `{{ content.name }}`);
+								form_data.append('work_title', `{{ content.title }}`);
+								form_data.append('student', `{{ frappe.session.user }}`);
+								form_data.append('doctype', `{{ content.doctype }}`);
+								form_data.append('course', `{{ course }}`);
+								form_data.append('topic', `{{ topic }}`);
+								form_data.append('program', `{{ program }}`);
+								//form_data.append('filedata', JSON.stringify(filedata));
+								form_data.append('filedata', "");
+								form_data.append('fileUrl', fileUrl);
+								xhr.send(form_data);
+							});
+
+
+
+
+						});
+
+
+					$("#btn_upload_old").click(function () {
+							$(".progress-bar_old").show();
+							var projname = $('#projname').val();
+							var filedata = $('#select_files_old').prop('filedata');
+
+							let progressBarFill = document.querySelector("#progressBarOld > .progress-bar-fill_old");
+							let progressBarText = progressBarFill.querySelector(".progress-bar-text_old");
+							var xhr = new XMLHttpRequest();
+							xhr.upload.addEventListener('progress', function (e) {
+								let percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+								if (parseInt(percent) === 100) {
+									percent = 99;
+								}
+								progressBarFill.style.width = percent.toFixed(2) + "%";
+								progressBarText.textContent = percent.toFixed(2) + "%";
+
+							});
+							xhr.onreadystatechange = function () {
+								if (xhr.readyState == XMLHttpRequest.DONE) {
+									if (xhr.status === 200) {
+										percent = 100;
+										progressBarFill.style.width = percent.toFixed(2) + "%";
+										progressBarText.textContent = percent.toFixed(2) + "%";
+										opts = {
+											method: "erpnext.education.utils.add_activity",
+											args: {
+												course: `{{ course }}`,
+												content_type: `{{ content_type }}`,
+												content: `{{ content.name }}`,
+												program: `{{ program }}`
+											}
+										}
+										frappe.call(opts).then(res => {})
+										frappe.msgprint({
+											title: "File Upload",
+											indicator: 'green',
+											message: "File(s) uploaded successfully.",
+											primary_action: {
+												'label': 'Confirm',
+												action(values) {
+													this.hide();
+													window.location.reload();
+												}
+											}
+										});
+									} else {
+										frappe.msgprint({
+											title: "File Upload",
+											indicator: 'red',
+											message: "File was not uploaded.",
+											primary_action: {
+												'label': 'Confirm',
+												action(values) {
+													this.hide();
+													window.location.reload();
+												}
+											}
+										});
+									}
+								}
+							};
+							xhr.open('POST', '/api/method/lms_api.silid.attach_file.attach_file_to_project_old', true);
+							xhr.setRequestHeader('Accept', 'application/json');
+							xhr.setRequestHeader('X-Frappe-CSRF-Token', frappe.csrf_token);
+							var form_data = new FormData();
+							form_data.append('work', `{{ content.name }}`);
+							form_data.append('title', `{{ content.name }}`);
+							form_data.append('work_title', `{{ content.title }}`);
+							form_data.append('student', `{{ frappe.session.user }}`);
+							form_data.append('doctype', `{{ content.doctype }}`);
+							form_data.append('course', `{{ course }}`);
+							form_data.append('filedata', JSON.stringify(filedata));
+							xhr.send(form_data);
+						});
+					});
+
+					function setupReader(file, input) {
+						var name = file.name;
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							input.filedata.files_data.push({
+								"__file_attachment": 1,
+								"filename": file.name,
+								"dataurl": reader.result
+							})
+						}
+						reader.readAsDataURL(file);
+					}
+					document.getElementById("wela2").innerHTML = "";
+				</script>
+			</div>
+
+
+			<div class="pull-right" {{ 'hidden' if content_type=='Quiz'}}>
+				{{ navigation() }}
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block script %}
+{% if content_type=='Video' %}
+<script src="https://cdn.plyr.io/3.5.3/plyr.js"></script>
+{% elif content_type == 'Quiz' %}
+<script src='/assets/erpnext/js/education/lms/quiz.js'>
+</script>
+
+{% endif  %}
+
+<script>
+	{% if content_type == 'Video' %}
+	const player = new Plyr('#player');
+	{% elif content_type == 'Quiz' %}
+	{% if next %}
+	const quiz_exit_button = 'Finish Task'
+	const next_url = `/lms/content?program={{ program }}&course={{ course }}&topic={{ topic }}&type={{ next.content_type }}&content={{ next.content }}`
+	{% else %}
+	const quiz_exit_button = 'Finish Task'
+	const next_url = `/lms/course?name={{ course }}&program={{ program }}`
+	{% endif %}
+
+	let build_quiz = function(){
+		//frappe.ready(() => {
+		const quiz = new Quiz(document.getElementById('quiz-wrapper'), {
+			name: `{{ content.name }}`,
+			course: `{{ course }}`,
+			program: `{{ program }}`,
+			quiz_exit_button: quiz_exit_button,
+			next_url: next_url
+		})
+		window.quiz = quiz;
+
+		//})
+	}
+	{% endif %}
+
+	{% if content_type != 'Quiz' %}
+
+	frappe.ready(() => {
+		next = document.getElementById('nextButton')
+		next.disabled = false;
+	})
+
+
+	function handle(url) {
+		opts = {
+			method: "erpnext.education.utils.add_activity",
+			args: {
+				course: `{{ course }}`,
+				content_type: `{{ content_type }}`,
+				content: `{{ content.name }}`,
+				program: `{{ program }}`
+			}
+		}
+		frappe.call(opts).then(res => {
+			window.location.href = url;
+		})
+	}
+
+	{% endif %}
+</script>
+
+<script type="text/javascript">
+
+	var countDownDate = "";
+	let built = 0;
+	frappe.ready(function () {
+		frappe.call({
+			method: "lms_api.lms_api.doctype.time_limit.time_limit.get_limit",
+			args: {
+				content_name: `{{ content.name }}`
+			},
+			async: false,
+			callback: function(r){
+				if(r.message !== undefined){
+					countDownDate = r.message;
+					start_quiz();
+				}
+			}
+		})
+	});
+
+	let start_quiz = function(){
+		frappe.msgprint({
+			title: "Affirmation",
+			indicator: 'green',
+			message: "1) Upon opening this exam I affirm that I will not give or receive any unauthorized help on this exam, and that all work will be my own.\n\n2) Upon clicking the submit button I affirm that I have not given or received any unauthorized help on this exam, and that this work is my own.",
+			primary_action: {
+				'label': 'Confirm',
+				action(values) {
+					this.hide();
+				}
+			}
+		});
+
+		if (built === 0) {
+			$("#start-quiz-button").hide();
+			start_countdown();
+			build_quiz();
+
+			built = 1;
+		} else {
+			console.log("Quiz already built");
+		}
+	};
+
+	let start_interval = function(countDownDate) {
+		// Update the count down every 1 second
+		let count_interval = setInterval(function () {
+
+			// Get today's date and time
+			var now = new Date().getTime();
+			// Find the distance between now and the count down date
+			var distance = countDownDate - now;
+			// Time calculations for days, hours, minutes and seconds
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			// Output the result in an element with id="demo"
+			let quiz_timer_element = document.getElementById("quiz_timer")
+			if (quiz_timer_element!=null){
+				document.getElementById("quiz_timer").innerHTML = "Time Remaining:" + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+			} else {
+				clearInterval(count_interval);
+			}
+
+
+			// If the count down is over, write some text
+			if (distance < 0) {
+				clearInterval(count_interval);
+				document.getElementById("quiz_timer").innerHTML = "Time's up!";
+
+
+				var x = document.getElementById("submit-button");
+				if (x.style.display === "none") {
+				} else {
+					//$("#submit-button").click();
+					quiz.submit_final();
+					frappe.msgprint("Time is up! Your quiz is submitted automatically!");
+					//x.style.display = "none";
+				}
+
+				var x = document.getElementById("select_files");
+				if (x != undefined) {
+					if (x.style.display === "none") {
+					} else {
+						x.style.display = "none";
+					}
+				}
+
+			}
+		}, 1000);
+	}
+
+	// Set the date we're counting down to
+	let start_countdown = function() {
+
+		frappe.call({
+			method: "lms_api.lms_api.doctype.time_limit.time_limit.get_limit",
+			args: {
+				content_name: `{{ content.name }}`
+			},
+			async: false,
+			callback: function(r){
+				if(r.message !== undefined){
+					countDownDate = r.message;
+					start_interval(parseInt(countDownDate)+5000)
+				}else {
+					countDownDate = new Date();
+					countDownDate.setMinutes(countDownDate.getMinutes() + {{ content.time_limit }});
+					countDownDate = countDownDate.getTime();
+					frappe.call({
+						method: "lms_api.lms_api.doctype.time_limit.time_limit.set_limit",
+						args: {
+							content_name: `{{ content.name }}`,
+							time_started: countDownDate,
+							content_title: `{{ content.title }}`
+						},
+						async: false,
+						callback: function(res) {
+							console.log("Timer Set");
+							$("#quiz-wrapper a").attr("target", "_blank");
+							start_interval(parseInt(countDownDate)+5000)
+						}
+					})
+				}
+			}
+		})
+
+
+	};
+</script>
+
+{% endblock %}

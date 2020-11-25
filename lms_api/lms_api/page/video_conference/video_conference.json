@@ -1,0 +1,31 @@
+{
+ "content": null,
+ "creation": "2020-05-01 09:29:04.816775",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2020-05-01 09:29:04.816775",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "video-conference",
+ "owner": "Administrator",
+ "page_name": "Video Conference",
+ "roles": [
+  {
+   "role": "Student"
+  },
+  {
+   "role": "Instructor"
+  },
+  {
+   "role": "LMS User"
+  },
+  {
+   "role": "School Prinicpal"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0
+}

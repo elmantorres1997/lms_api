@@ -1,0 +1,13 @@
+.DS_Store
+*.pyc
+*.pyc.*
+*.egg-info
+*.swp
+tags
+lms_api/docs/current
+localupdate.sh
+backupbranch.sh
+.idea/
+.idea/*
+
+

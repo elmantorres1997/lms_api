@@ -1,0 +1,177 @@
+{
+ "allow_rename": 1,
+ "creation": "2020-08-08 10:29:18.449394",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "student",
+  "student_name",
+  "raw_score",
+  "highest_possible_score",
+  "activity_title",
+  "activity_name",
+  "activity_type",
+  "status",
+  "activity_link_type",
+  "column_break_10",
+  "quarter",
+  "school_year",
+  "program",
+  "course",
+  "component",
+  "teacher"
+ ],
+ "fields": [
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "label": "Student",
+   "options": "Student"
+  },
+  {
+   "fieldname": "raw_score",
+   "fieldtype": "Data",
+   "label": "Raw Score"
+  },
+  {
+   "fieldname": "teacher",
+   "fieldtype": "Link",
+   "label": "Teacher",
+   "options": "User"
+  },
+  {
+   "fieldname": "component",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Component",
+   "options": "Classwork Category"
+  },
+  {
+   "fieldname": "quarter",
+   "fieldtype": "Link",
+   "label": "Quarter",
+   "options": "Quarter"
+  },
+  {
+   "fieldname": "school_year",
+   "fieldtype": "Link",
+   "label": "School Year",
+   "options": "Academic Year"
+  },
+  {
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Student Name"
+  },
+  {
+   "fieldname": "activity_type",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Activity Type",
+   "options": "Quiz Activity\nWritten Activity"
+  },
+  {
+   "fieldname": "activity_name",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Activity Name",
+   "options": "activity_link_type"
+  },
+  {
+   "fieldname": "activity_title",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Activity Title"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "highest_possible_score",
+   "fieldtype": "Int",
+   "label": "Highest Possible Score"
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Program",
+   "options": "Program"
+  },
+  {
+   "fieldname": "course",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Subject",
+   "options": "Course"
+  },
+  {
+   "default": "Quiz",
+   "fieldname": "activity_link_type",
+   "fieldtype": "Select",
+   "label": "Activity Link Type",
+   "options": "Quiz\nArticle\nVideo"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "modified": "2020-10-14 11:13:16.411459",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Master Grade",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Instructor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "LMS User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "activity_title",
+ "track_changes": 1
+}

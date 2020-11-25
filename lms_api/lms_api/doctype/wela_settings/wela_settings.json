@@ -1,0 +1,328 @@
+{
+ "creation": "2020-06-04 17:36:58.637856",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "video_tool",
+  "api",
+  "column_break_2",
+  "enable_zoom",
+  "enable_bigbluebutton",
+  "enable_meet",
+  "section_break_4",
+  "school_code",
+  "url",
+  "username",
+  "password",
+  "banner",
+  "about",
+  "dashboard_image",
+  "help_pdf",
+  "session_limit",
+  "restrict_teacher_assignment",
+  "restrict_subject_assignment",
+  "text_notification",
+  "text_notification_service",
+  "wela_url",
+  "wela_username",
+  "wela_password",
+  "post_notification_text_service",
+  "wela_api_url",
+  "wela_api_username",
+  "wela_api_password",
+  "content_text_service",
+  "topic_date",
+  "days_to_hide_quiz_answers"
+ ],
+ "fields": [
+  {
+   "fieldname": "video_tool",
+   "fieldtype": "Select",
+   "label": "Video Tool",
+   "options": "Jitsi\nZoom\nBigBlueButton"
+  },
+  {
+   "fieldname": "school_code",
+   "fieldtype": "Data",
+   "label": "School Code"
+  },
+  {
+   "fieldname": "url",
+   "fieldtype": "Data",
+   "label": "URL"
+  },
+  {
+   "fieldname": "username",
+   "fieldtype": "Data",
+   "label": "Username"
+  },
+  {
+   "fieldname": "password",
+   "fieldtype": "Data",
+   "label": "Password"
+  },
+  {
+   "fieldname": "about",
+   "fieldtype": "Text Editor",
+   "label": "About"
+  },
+  {
+   "fieldname": "banner",
+   "fieldtype": "Attach Image",
+   "label": "Banner"
+  },
+  {
+   "fieldname": "dashboard_image",
+   "fieldtype": "Attach",
+   "label": "Dashboard Image"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_zoom",
+   "fieldtype": "Check",
+   "label": "Enable Zoom"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_bigbluebutton",
+   "fieldtype": "Check",
+   "label": "Enable BigBlueButton"
+  },
+  {
+   "default": "Scalelite 1",
+   "fieldname": "api",
+   "fieldtype": "Select",
+   "label": "API",
+   "options": "Scalelite 1\nScalelite 2\nScalelite 3"
+  },
+  {
+   "fieldname": "help_pdf",
+   "fieldtype": "Attach",
+   "label": "Help PDF"
+  },
+  {
+   "default": "1",
+   "fieldname": "session_limit",
+   "fieldtype": "Int",
+   "label": "Session Limit"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_meet",
+   "fieldtype": "Check",
+   "label": "Enable Meet"
+  },
+  {
+   "default": "0",
+   "fieldname": "restrict_teacher_assignment",
+   "fieldtype": "Check",
+   "label": "Restrict Program Assignment"
+  },
+  {
+   "default": "0",
+   "fieldname": "restrict_subject_assignment",
+   "fieldtype": "Check",
+   "label": "Restrict Subject Assignment"
+  },
+  {
+   "default": "0",
+   "fieldname": "text_notification",
+   "fieldtype": "Check",
+   "label": "Enable Logon Text Notification",
+   "permlevel": 1
+  },
+  {
+   "default": "Tailerp",
+   "depends_on": "eval:doc.text_notification === 1",
+   "fieldname": "text_notification_service",
+   "fieldtype": "Select",
+   "label": "SMS Notification Service",
+   "options": "Tailerp\nWela",
+   "permlevel": 1
+  },
+  {
+   "depends_on": "eval:doc.text_notification_service === \"Wela\"",
+   "fieldname": "wela_url",
+   "fieldtype": "Data",
+   "label": "Wela URL",
+   "permlevel": 1
+  },
+  {
+   "depends_on": "eval:doc.text_notification_service === \"Wela\"",
+   "fieldname": "wela_username",
+   "fieldtype": "Data",
+   "label": "Wela Username",
+   "permlevel": 1
+  },
+  {
+   "depends_on": "eval:doc.text_notification_service === \"Wela\"",
+   "fieldname": "wela_password",
+   "fieldtype": "Password",
+   "label": "Wela Password",
+   "permlevel": 1
+  },
+  {
+   "default": "Tailerp",
+   "fieldname": "post_notification_text_service",
+   "fieldtype": "Select",
+   "label": "Post Notification Text Service",
+   "options": "Memo\nTailerp",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "wela_api_url",
+   "fieldtype": "Data",
+   "label": "Wela API Url",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "wela_api_username",
+   "fieldtype": "Data",
+   "label": "Wela API Username",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "wela_api_password",
+   "fieldtype": "Password",
+   "label": "Wela API Password",
+   "permlevel": 1
+  },
+  {
+   "default": "Memo",
+   "description": "This is the \"Send Text\" button you can find on Content Silid. ",
+   "fieldname": "content_text_service",
+   "fieldtype": "Select",
+   "label": "Content Text Service",
+   "options": "Memo\nTailerp"
+  },
+  {
+   "description": "Topic created from Date selected onwards will be displayed in Silid ",
+   "fieldname": "topic_date",
+   "fieldtype": "Date",
+   "label": "Topic Date To Show",
+   "permlevel": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "days_to_hide_quiz_answers",
+   "fieldtype": "Int",
+   "label": "Days to Hide Quiz Answers",
+   "permlevel": 1
+  }
+ ],
+ "issingle": 1,
+ "modified": "2020-11-14 13:01:20.332613",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Wela Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Student",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "LMS User",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Instructor",
+   "share": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "School Prinicpal",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "delete": 1,
+   "email": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "role": "School Prinicpal",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Instructor",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "role": "LMS User",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "permlevel": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Student",
+   "share": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

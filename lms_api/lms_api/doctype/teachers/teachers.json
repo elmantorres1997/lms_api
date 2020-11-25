@@ -1,0 +1,61 @@
+{
+ "creation": "2020-08-01 17:43:46.738173",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "teacher"
+ ],
+ "fields": [
+  {
+   "fieldname": "teacher",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Teacher",
+   "options": "User"
+  }
+ ],
+ "modified": "2020-08-01 17:44:58.393864",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Teachers",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Instructor",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,52 @@
+{
+ "creation": "2020-06-07 22:24:28.241986",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_check",
+  "student",
+  "student_name",
+  "branch"
+ ],
+ "fields": [
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Student",
+   "options": "Student",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "section_check",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Section Check"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Student Name"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-08-12 16:36:15.828136",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Enrollees Silid",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

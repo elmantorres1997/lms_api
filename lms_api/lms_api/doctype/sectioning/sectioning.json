@@ -1,0 +1,110 @@
+{
+ "autoname": "format:{program}-{academic_year}",
+ "creation": "2020-07-22 08:35:28.558965",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "program",
+  "year_level",
+  "academic_year",
+  "branch",
+  "remove_permission",
+  "enrollees",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Program",
+   "options": "Program",
+   "reqd": 1
+  },
+  {
+   "fieldname": "year_level",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Grade/Year Level",
+   "options": "Year Level",
+   "reqd": 1
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Academic Year",
+   "options": "Academic Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sectioning",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "enrollees",
+   "fieldtype": "Table",
+   "label": "Enrollees",
+   "options": "Enrollees Silid"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "default": "1",
+   "fieldname": "remove_permission",
+   "fieldtype": "Check",
+   "label": "Remove old permission"
+  }
+ ],
+ "is_submittable": 1,
+ "modified": "2020-08-18 08:14:10.338965",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Sectioning",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "School Prinicpal",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Custom Script",
+  "dt": "Content Silid",
+  "modified": "2020-09-02 10:02:33.330005",
+  "name": "Content Silid-Client",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Content Silid', {\n\t\n})"
+ }
+]

@@ -1,0 +1,15 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Calendar View",
+  "end_date_field": "deadline",
+  "modified": "2020-09-21 08:18:52.407652",
+  "name": "To Do Tasks",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "reference_doctype": "To Do Tasks",
+  "start_date_field": "publish_date",
+  "subject_field": "title"
+ }
+]

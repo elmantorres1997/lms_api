@@ -1,0 +1,74 @@
+{
+ "creation": "2020-10-15 09:52:37.704316",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "program",
+  "students",
+  "select_student",
+  "school_year",
+  "add_students"
+ ],
+ "fields": [
+  {
+   "fieldname": "program",
+   "fieldtype": "Select",
+   "label": "Program"
+  },
+  {
+   "fieldname": "students",
+   "fieldtype": "Table",
+   "label": "Students",
+   "options": "Enrollment Tool Student"
+  },
+  {
+   "fieldname": "select_student",
+   "fieldtype": "Table MultiSelect",
+   "label": "Select Students",
+   "options": "Student Link"
+  },
+  {
+   "fieldname": "add_students",
+   "fieldtype": "Button",
+   "label": "Add Students"
+  },
+  {
+   "fieldname": "school_year",
+   "fieldtype": "Link",
+   "label": "School Year",
+   "options": "Academic Year"
+  }
+ ],
+ "issingle": 1,
+ "modified": "2020-10-15 13:46:07.943626",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Enrollment Tool",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Instructor",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

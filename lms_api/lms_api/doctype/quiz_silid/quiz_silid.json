@@ -1,0 +1,209 @@
+{
+ "allow_rename": 1,
+ "creation": "2020-04-01 18:00:06.888347",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "quiz_status",
+  "section_break_2",
+  "quiz_title",
+  "check_exam_permit",
+  "passing_score",
+  "max_attempts",
+  "time_limit",
+  "items",
+  "shuffle_question",
+  "highest_possible_score",
+  "program",
+  "course",
+  "topic",
+  "classwork_category",
+  "quarter",
+  "school_year",
+  "sec1",
+  "topic_content",
+  "in_silid"
+ ],
+ "fields": [
+  {
+   "fieldname": "quiz_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Quiz Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Quiz Silid Items",
+   "reqd": 1
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Program",
+   "options": "Program",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "course",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Subject",
+   "options": "Course",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "topic",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Topic",
+   "options": "Topic",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "classwork_category",
+   "fieldtype": "Link",
+   "label": "Classwork Category",
+   "options": "Classwork Category",
+   "reqd": 1
+  },
+  {
+   "default": "50",
+   "description": "Score out of 100",
+   "fieldname": "passing_score",
+   "fieldtype": "Float",
+   "label": "Passing Score"
+  },
+  {
+   "default": "1",
+   "description": "Enter 0 to waive limit",
+   "fieldname": "max_attempts",
+   "fieldtype": "Data",
+   "label": "Max Attempts"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval: doc.max_attempts == \"1\"",
+   "description": "in minutes.",
+   "fieldname": "time_limit",
+   "fieldtype": "Int",
+   "label": "Time Limit"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "sec1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "topic_content",
+   "fieldtype": "Data",
+   "label": "Topic Content",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "highest_possible_score",
+   "fieldtype": "Data",
+   "label": "Highest Possible Score",
+   "read_only": 1
+  },
+  {
+   "fieldname": "quarter",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Quarter",
+   "options": "Quarter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "school_year",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "School Year",
+   "options": "Academic Year",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "shuffle_question",
+   "fieldtype": "Check",
+   "label": "Shuffle Question"
+  },
+  {
+   "fieldname": "quiz_status",
+   "fieldtype": "Text Editor",
+   "label": "Quiz Status"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "in_silid",
+   "fieldtype": "Data",
+   "label": "In Silid"
+  },
+  {
+   "default": "0",
+   "fieldname": "check_exam_permit",
+   "fieldtype": "Check",
+   "label": "Check Exam Permit"
+  }
+ ],
+ "modified": "2020-11-11 11:00:38.743674",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Quiz Silid",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Instructor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "quiz_title",
+ "track_changes": 1
+}

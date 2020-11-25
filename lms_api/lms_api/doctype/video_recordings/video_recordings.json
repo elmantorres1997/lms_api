@@ -1,0 +1,48 @@
+{
+ "creation": "2020-07-20 00:01:46.454619",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "filename",
+  "date_and_time",
+  "view_recording",
+  "url"
+ ],
+ "fields": [
+  {
+   "fieldname": "filename",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Filename"
+  },
+  {
+   "fieldname": "date_and_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Date and Time"
+  },
+  {
+   "fieldname": "view_recording",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "View Recording"
+  },
+  {
+   "fieldname": "url",
+   "fieldtype": "Long Text",
+   "label": "URL"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-07-20 16:17:37.312051",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Video Recordings",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

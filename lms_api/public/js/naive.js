@@ -1,0 +1,1 @@
+let download_file=function(e,i){let a=e.includes("private");window.open(`/api/method/lms_api.patches.private.download?filename=${i}&is_private=${a}`)};

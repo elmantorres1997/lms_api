@@ -1,0 +1,18 @@
+GET_STUDENT: "SELECT name from tabStudent"
+GET_STUDENT_1: "SELECT name from tabStudent"
+GET_COURSES_VIA_STUDENT_ID: "SELECT course from `tabCourse Enrollment`"
+GET_POSTS: "SELECT name,creation,modified,owner,idx,liked_by, is_pinned,content,is_globally_pinned,_user_tags,_comments,_assign,_liked_by,course from tabPost"
+GET_TEACHER_COURSES: "SELECT `tabTeachers`.parent as course from `tabTeachers`"
+GET_CHATROOM: "SELECT DISTINCT `tabChat Room User`.name, `tabChat Room`.type FROM `tabChat Room User` JOIN `tabChat Room` ON
+`tabChat Room User`.parent=`tabChat Room`.name "
+GET_WELA_SETTINGS: "SELECT field, value from tabSingles"
+GET_STUDENT_SCORES: "SELECT `tabQuiz`.title as quiz_title,`tabQuiz Activity`.student, `tabQuiz Activity`.modified, `tabQuiz Activity`.remarks,
+`tabQuiz Activity`.score as score, `tabQuiz`.max_points as max_points,`tabQuiz`.passing_score, `tabQuiz Activity`.status as status, `tabStudent`.name,
+ `tabQuiz`.name as quiz_name
+FROM `tabQuiz Activity` JOIN `tabStudent` ON  `tabQuiz Activity`.student=`tabStudent`.name
+ JOIN `tabQuiz` ON `tabQuiz Activity`.quiz=`tabQuiz`.name"
+GET_STUDENT_COMMENTS_FROM_30_MINUTES_AGO: "SELECT `tabPost`.`name`,`tabHas Role`.role, `tabPost`.`owner` as post_owner,`tabPost Comment`.`content`  FROM `tabPost Comment`
+LEFT JOIN `tabPost` ON `tabPost Comment`.`parent`=`tabPost`.`name`
+LEFT JOIN `tabHas Role` ON `tabHas Role`.`parent`=`tabPost`.`owner`
+WHERE `tabPost`.`owner`!='Administrator' AND `tabHas Role`.`role`='Instructor' AND `tabPost Comment`.creation >= (NOW() - INTERVAL 30 MINUTE)"
+GET_USER_MOBILE_NO: "SELECT `tabUser`.mobile_no FROM `tabUser`"

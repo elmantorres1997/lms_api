@@ -1,0 +1,33 @@
+[
+ {
+  "breadcrumbs": null,
+  "content_type": "HTML",
+  "css": ".video-container {\n  position: relative;\n    padding-bottom: 56.25%; /* 16:9 */\n    padding-top: 25px;\n    height: 0;\n}\n.video {\n  position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n}",
+  "docstatus": 0,
+  "doctype": "Web Page",
+  "dynamic_template": 1,
+  "enable_comments": 0,
+  "end_date": null,
+  "header": null,
+  "insert_code": 1,
+  "insert_style": 1,
+  "javascript": "\n\nfrappe.ready(() => {\n    // your script here\n    frappe.call({\n       method:\"lms_api.lms_api.doctype.web_page.web_page.get_help_pdf\",\n       callback:function(r){\n           console.log(r.message);\n           if (r.message !== undefined) {\n               $('#helppdf').attr('src', r.message);\n           } else {\n               $('#helppdf').attr('src', 'https://welaph.s3-ap-southeast-1.amazonaws.com/help.pdf');\n           }\n       }\n    });\n});\n\n",
+  "main_section": null,
+  "main_section_html": "\n<div>\n<iframe src=\"\" width='100%' height='1024' allowfullscreen webkitallowfullscreen id=\"helppdf\"></iframe>\n</div>\n<br>\n\n<h3>How to Videos</h3>\n<div class=\"video-container\">\n<iframe \nsrc=\"https://www.youtube.com/embed/PazV9Ox1NoQ\" \nframeborder=\"0\" class=\"video\"\nallow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" \nallowfullscreen></iframe>\n</div>\n\n<br>\n\n<div class=\"video-container\">\n<iframe \nsrc=\"https://www.youtube.com/embed/uYYnryIM0Uw\" \nframeborder=\"0\" class=\"video\"\nallow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" \nallowfullscreen></iframe>\n</div>\n\n<br>\n\n",
+  "main_section_md": null,
+  "modified": "2020-07-24 17:26:20.434222",
+  "name": "how-to-use-silid",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "published": 1,
+  "route": "how-to-use-silid",
+  "show_sidebar": 0,
+  "show_title": 1,
+  "slideshow": null,
+  "start_date": null,
+  "text_align": "Left",
+  "title": "How to use Silid",
+  "website_sidebar": null
+ }
+]

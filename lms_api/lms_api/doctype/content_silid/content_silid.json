@@ -1,0 +1,233 @@
+{
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2020-03-30 20:33:22.094704",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "author",
+  "is_video",
+  "provider",
+  "url",
+  "column_break_4",
+  "publish_date",
+  "deadline",
+  "duration",
+  "time_limit",
+  "section_break_7",
+  "description",
+  "program",
+  "course",
+  "topic",
+  "quarter",
+  "school_year",
+  "classwork_category",
+  "highest_possible_score",
+  "section1",
+  "topic_content",
+  "article_number",
+  "iframe_playposit",
+  "remind_new"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "author",
+   "fieldtype": "Data",
+   "label": "Author"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_video",
+   "fieldtype": "Check",
+   "label": "Is Video"
+  },
+  {
+   "fieldname": "provider",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Provider",
+   "options": "YouTube\nVimeo"
+  },
+  {
+   "fieldname": "url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "URL"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "label": "Duration"
+  },
+  {
+   "fieldname": "time_limit",
+   "fieldtype": "Int",
+   "label": "Time Limit"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Program",
+   "options": "Program",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "course",
+   "fieldtype": "Link",
+   "label": "Subject",
+   "no_copy": 1,
+   "options": "Course",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "topic",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Topic",
+   "no_copy": 1,
+   "options": "Topic",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "classwork_category",
+   "fieldtype": "Link",
+   "label": "Classwork Category",
+   "options": "Classwork Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "highest_possible_score",
+   "fieldtype": "Float",
+   "label": "Highest Possible Score"
+  },
+  {
+   "fieldname": "deadline",
+   "fieldtype": "Datetime",
+   "label": "Deadline"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "topic_content",
+   "fieldtype": "Data",
+   "label": "Topic Content",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "article_number",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Article Number"
+  },
+  {
+   "fieldname": "iframe_playposit",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "iframe_playposit"
+  },
+  {
+   "fieldname": "publish_date",
+   "fieldtype": "Datetime",
+   "label": "Publish Date"
+  },
+  {
+   "fieldname": "quarter",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Quarter",
+   "options": "Quarter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "school_year",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "School Year",
+   "options": "Academic Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remind_new",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "reminder"
+  }
+ ],
+ "modified": "2020-09-14 09:01:42.052829",
+ "modified_by": "Administrator",
+ "module": "LMS API",
+ "name": "Content Silid",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Instructor",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "LMS User",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "title",
+ "track_changes": 1
+}
