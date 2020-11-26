@@ -56,8 +56,8 @@ cp -v -r $apps_dir/lms_api/lms_api/silid/desk/* $apps_dir/frappe/frappe/desk/doc
 cp -v $apps_dir/lms_api/lms_api/silid/utils.py $apps_dir/frappe/frappe/desk/form/ &&
 cp -v $apps_dir/lms_api/lms_api/silid/html_utils.py $apps_dir/frappe/frappe/utils/ &&
 
-cd ../.. &&
-bench setup requirements --python &&
-bench build &&
-bench --site all clear-cache &&
-bench restart
+#cd ../.. &&
+#bench setup requirements --python &&
+#bench build &&
+#bench --site all clear-cache &&
+#bench restart

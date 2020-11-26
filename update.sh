@@ -1,8 +1,8 @@
 
 cd apps/lms_api &&
-git reset --hard &&
+#git reset --hard &&
 echo $'Running Git Pull\n' &&
-git pull &&
+#git pull &&
 echo $'\nRunning update script: \n' &&
 SCRIPT_PATH="./update_script.sh" &&
 source "$SCRIPT_PATH" &&
