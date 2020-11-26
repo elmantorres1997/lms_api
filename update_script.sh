@@ -54,7 +54,7 @@ cp -v $apps_dir/lms_api/lms_api/silid/file_manager.py $apps_dir/frappe/frappe/ut
 cp -v $apps_dir/lms_api/lms_api/silid/file_manager_old.py $apps_dir/frappe/frappe/utils/ &&
 cp -v -r $apps_dir/lms_api/lms_api/silid/desk/* $apps_dir/frappe/frappe/desk/doctype/ &&
 cp -v $apps_dir/lms_api/lms_api/silid/utils.py $apps_dir/frappe/frappe/desk/form/ &&
-cp -v $apps_dir/lms_api/lms_api/silid/html_utils.py $apps_dir/frappe/frappe/utils/ &&
+cp -v $apps_dir/lms_api/lms_api/silid/html_utils.py $apps_dir/frappe/frappe/utils/ 
 
 #cd ../.. &&
 #bench setup requirements --python &&
